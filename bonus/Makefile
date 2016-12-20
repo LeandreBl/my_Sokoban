@@ -5,14 +5,14 @@
 ## Login   <lblanchard@epitech.net>
 ##
 ## Started on  Mon Nov 21 12:31:51 2016 Leandre Blanchard
-## Last update Tue Dec 13 16:09:03 2016 Leandre Blanchard
+## Last update Tue Dec 20 17:00:34 2016 Léandre Blanchard
 ##
 
 NAME    = my_sokoban
 
 CC      = gcc
 
-LIB     = -L./lib -lmy -lncurses
+LIB     = -L./lib -lmy -lncurses -lc_graph_prog
 
 SRCS    = main.c \
 	  display.c \

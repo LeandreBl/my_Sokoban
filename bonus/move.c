@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Mon Dec  5 15:25:01 2016 Leandre Blanchard
-** Last update Tue Dec 13 17:05:22 2016 Leandre Blanchard
+** Last update Tue Dec 20 18:06:45 2016 Léandre Blanchard
 */
 
 #include "include/sokoban.h"
@@ -27,6 +27,10 @@ t_xy            check_pos_mvt(char **tab, t_xy xy, char *path, int color)
     xy = move_right(tab, xy);
   if (alpha == 32)
     terrain_display(str_to_tab(path), path, color);
+  if (alpha == 'm')
+    sfMusic_pause(theme);
+  if (alpha == 'M')
+    sfMusic_play(theme);
   if (alpha == 10)
     {
       endwin();
@@ -47,6 +51,8 @@ t_xy		move_right(char **tab, t_xy xy)
   else if (tab[xy.x][xy.y + 1] == 'X' && tab[xy.x][xy.y + 2] != '#'
 	   && tab[xy.x][xy.y + 2] != 'X' && tab[xy.x][xy.y] == 'P')
     {
+      if (tab[xy.x][xy.y + 2] == 'O')
+	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
       tab[xy.x][xy.y] = ' ';
       tab[xy.x][xy.y + 1] = 'P';
       tab[xy.x][xy.y + 2] = 'X';
@@ -67,6 +73,8 @@ t_xy            move_left(char **tab, t_xy xy)
   else if (tab[xy.x][xy.y - 1] == 'X' && tab[xy.x][xy.y - 2] != '#'
 	   && tab[xy.x][xy.y - 2] != 'X' && tab[xy.x][xy.y] == 'P')
     {
+      if (tab[xy.x][xy.y - 2] == 'O')
+	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
       tab[xy.x][xy.y] = ' ';
       tab[xy.x][xy.y - 1] = 'P';
       tab[xy.x][xy.y - 2] = 'X';
@@ -87,6 +95,8 @@ t_xy            move_up(char **tab, t_xy xy)
   else if (tab[xy.x - 1][xy.y] == 'X' && tab[xy.x - 2][xy.y] != '#'
 	   && tab[xy.x - 2][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
     {
+      if (tab[xy.x - 2][xy.y] == 'O')
+	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
       tab[xy.x][xy.y] = ' ';
       tab[xy.x - 1][xy.y] = 'P';
       tab[xy.x - 2][xy.y] = 'X';
@@ -107,6 +117,8 @@ t_xy            move_down(char **tab, t_xy xy)
   else if (tab[xy.x + 1][xy.y] == 'X' && tab[xy.x + 2][xy.y] != '#'
 	   && tab[xy.x + 2][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
     {
+      if (tab[xy.x + 2][xy.y] == 'O')
+	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
       tab[xy.x][xy.y] = ' ';
       tab[xy.x + 1][xy.y] = 'P';
       tab[xy.x + 2][xy.y] = 'X';

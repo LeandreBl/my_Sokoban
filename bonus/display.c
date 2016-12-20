@@ -5,10 +5,18 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Mon Dec  5 12:56:15 2016 Leandre Blanchard
-** Last update Tue Dec 13 19:43:08 2016 Leandre Blanchard
+** Last update Tue Dec 20 17:47:11 2016 Léandre Blanchard
 */
 
 #include "include/sokoban.h"
+
+void		init_display()
+{
+  initscr();
+  start_color();
+  init_pair(1, COLOR_WHITE, COLOR_BLACK);
+  attron(COLOR_PAIR(1));
+}
 
 int		terrain_display(char **tab, char *path, int color)
 {
@@ -19,10 +27,7 @@ int		terrain_display(char **tab, char *path, int color)
 
   posdot = add_coord(posdot, tab);
   xy = get_pos(tab);
-  initscr();
-  start_color();
-  init_pair(1, COLOR_WHITE, COLOR_BLACK);
-  attron(COLOR_PAIR(1));
+  init_display();
   moves = 0;
   while (1)
     {
@@ -44,6 +49,7 @@ void		lose_screen(char **tab, char *path, int color)
   int		key;
   t_xy		*posdot;
 
+  sfMusic_play(sfMusic_createFromFile("lose.ogg"));
   posdot = add_coord(posdot, tab);
   key = 0;
   clear();
@@ -91,6 +97,7 @@ void		win_screen(char **tab, char *path, int color, int score)
 {
   int		key;
 
+  sfMusic_play(sfMusic_createFromFile("win.ogg"));
   key = 0;
   clear();
   refresh();
@@ -107,3 +114,4 @@ void		win_screen(char **tab, char *path, int color, int score)
   if (key == 'Y' || key == 'y')
     terrain_display(str_to_tab(path), path, color);
 }
+

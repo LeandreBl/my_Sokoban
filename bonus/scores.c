@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Tue Dec 13 11:49:36 2016 Leandre Blanchard
-** Last update Tue Dec 13 18:43:02 2016 Leandre Blanchard
+** Last update Tue Dec 20 17:14:43 2016 Léandre Blanchard
 */
 
 #include "include/sokoban.h"
@@ -24,20 +24,30 @@ void		init_pairs()
 int		scores(char **tab, t_xy *posdot)
 {
   int		i;
-  int		score;
+  float		score;
+  int		nb;
+  float		a;
 
+  a = 0;
   i = 0;
   score = 0;
+  while (posdot[nb].x < 2000)
+    nb = nb + 1;
   while (posdot[i].x < 2000)
     {
       if (tab[posdot[i].x][posdot[i].y] == 'X')
-	score = score + 100;
+	score = score + 1;
       i = i + 1;
     }
+  a = nb;
   attron(COLOR_PAIR(4));
-  mvprintw(1, COLS / 2 - 10, "<Your score is [%d]>", score);
+  if (score != 0)
+    mvprintw(1, COLS / 2 - 10, "<Level completed at [%1.f%%]>",
+	     score / a * 100);
+  if (score == 0)
+    mvprintw(1, COLS / 2 - 10, "<Level completed at [0%%]>");
   attroff(COLOR_PAIR(4));
-  return (score);
+  return (score * 1000);
 }
 
 void		put_tab_color(char **tab, int i, int j, t_xy *posdot)

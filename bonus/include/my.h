@@ -5,8 +5,11 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Thu Oct 13 09:19:01 2016 Leandre Blanchard
-** Last update Tue Dec 13 17:04:07 2016 Leandre Blanchard
+** Last update Tue Dec 20 18:16:58 2016 Léandre Blanchard
 */
+
+#ifndef MY_H_
+# define MY_H
 
 void	my_putchar(char);
 
@@ -79,3 +82,5 @@ int	my_show_wordtab(char **);
 char	*my_strdup(char *);
 
 int	my_printf(char *, ...);
+
+#endif /* MY_H_ */

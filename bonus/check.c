@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Mon Dec 12 15:54:03 2016 Leandre Blanchard
-** Last update Tue Dec 13 17:04:22 2016 Leandre Blanchard
+** Last update Tue Dec 20 16:16:34 2016 Léandre Blanchard
 */
 
 #include "include/sokoban.h"
@@ -67,4 +67,33 @@ int	check_boxes(char **tab, int x, int y)
 	  || tab[x][y - 1] == 'X' || tab[x][y + 1] == 'X'))
     return (1);
   return (0);
+}
+
+int		p_x_o_check(char **tab, char *buffer)
+{
+  t_xy		x_o;
+  t_vars	v;
+
+  v.k = 0;
+  v.i = 0;
+  x_o = xy_tuple(0, 0);
+  while (tab[v.i] != NULL)
+    {
+      v.j = 0;
+      while (v.j != line_len(buffer))
+	{
+	  if (tab[v.i][v.j] == 'X' || tab[v.i][v.j] == 'O')
+	    (tab[v.i][v.j] == 'X') ? x_o.x++ : x_o.y++;
+	  if (tab[v.i][v.j] == 'P')
+	    v.k = v.k + 1;
+	  v.j = v.j + 1;
+	}
+      v.i = v.i + 1;
+    }
+  if (x_o.x == x_o.y && v.k == 1)
+    return (0);
+  if (x_o.x != x_o.y)
+    return (1);
+  if (v.j != 1)
+    return (2);
 }

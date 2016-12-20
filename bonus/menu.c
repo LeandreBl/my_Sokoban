@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Mon Dec 12 20:29:18 2016 Leandre Blanchard
-** Last update Tue Dec 13 17:06:08 2016 Leandre Blanchard
+** Last update Tue Dec 20 17:37:51 2016 Léandre Blanchard
 */
 
 #include "include/sokoban.h"
@@ -87,7 +87,7 @@ char            *menu_loop(char **names)
       i = getch();
       a = receive_keys(i, a, names);
       if (i == 10)
-        return (names[a]);
+	return (names[a]);
       refresh();
       if (i == 'x' || i == 'X')
 	break;
