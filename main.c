@@ -10,37 +10,37 @@
 
 #include "include/sokoban.h"
 
-void            tight(char *path, char **tab)
+void tight(char *path, char **tab)
 {
   while (LINES < my_tablen(tab) || COLS < line_len(path))
-    {
-      clear();
-      mvprintw(LINES / 2, COLS / 2 - 11, "terminal to tight [!]");
-      refresh();
-    }
+  {
+    clear();
+    mvprintw(LINES / 2, COLS / 2 - 11, "terminal to tight [!]");
+    refresh();
+  }
 }
 
-int			main(int ac, char **av)
+int main(int ac, char **av)
 {
-  char			*buffer;
-  int			size;
+  char *buffer;
+  int size;
 
   if (ac != 2)
     exit(ARGS_ERROR);
   if (av[1][0] == '-' && av[1][1] == 'h')
-    {
-      my_printf("%s%s%s%s", "USAGE\n\t./my_sokoban map\nDescription\n\t",
-		"map     file representing the warehouse map, containing ’#’",
-		"for walls,\n\t\t’P’ for the player, ’X’",
-		"for boxes and ’O’ for storage locations.\n");
-      return (0);
-    }
+  {
+    printf("%s%s%s%s", "USAGE\n\t./my_sokoban map\nDescription\n\t",
+           "map     file representing the warehouse map, containing ’#’",
+           "for walls,\n\t\t’P’ for the player, ’X’",
+           "for boxes and ’O’ for storage locations.\n");
+    return (0);
+  }
   buffer = malloc(5000);
   size = read(open(av[1], O_RDONLY), buffer, 5000);
   if (size == 0)
     return (READ_EMPTY);
   buffer[size] = 0;
-  terrain_display(str_to_tab(buffer), buffer, 2);
+  terrain_display(str_to_tab(buffer), buffer, 0);
   free(buffer);
   return (0);
 }
