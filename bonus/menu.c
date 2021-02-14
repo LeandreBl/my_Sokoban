@@ -36,14 +36,17 @@ char **display_files(DIR *dir)
     if ((names = malloc(sizeof(char *) * 20)) == NULL)
         return (NULL);
     folder = readdir(dir);
-    while ((folder = readdir(dir)) != NULL) {
-        if (test_wf(folder->d_name) == 0) {
+    while ((folder = readdir(dir)) != NULL)
+    {
+        if (test_wf(folder->d_name) == 0)
+        {
             names[i] = strdup(folder->d_name);
             i = i + 1;
         }
     }
     names[i] = NULL;
-    while (i < 0) {
+    while (i < 0)
+    {
         mvprintw(
             LINES / 2 - 8 - i, COLS / 2 - my_strlen(names[i]) / 2, names[i]);
         i = i + 1;
@@ -57,7 +60,8 @@ void names_print(char **names)
     int j;
 
     j = 0;
-    while (names[j] != NULL) {
+    while (names[j] != NULL)
+    {
         mvprintw(LINES / 2 + j, COLS / 2 - my_strlen(names[j]) / 2, names[j]);
         j = j + 1;
     }
@@ -73,7 +77,8 @@ char *menu_loop(char **names)
 
     a = 0;
     i = 0;
-    while (a != (-1)) {
+    while (a != (-1))
+    {
         clear();
         title(names);
         names_print(names);

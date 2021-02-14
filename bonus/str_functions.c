@@ -28,7 +28,8 @@ int nb_of_line(char *str)
 
     i = 0;
     nb = 0;
-    while (str[i] != 0) {
+    while (str[i] != 0)
+    {
         if (str[i] == '\n')
             nb = nb + 1;
         i = i + 1;
@@ -58,11 +59,13 @@ char **str_to_tab(char *str)
     if ((tab = malloc(sizeof(char *) * nb_of_line(str) + 1)) == NULL)
         exit(MALLOC_ERROR);
     tab[nb_of_line(str)] = NULL;
-    while (str[i] != 0) {
+    while (str[i] != 0)
+    {
         j = 0;
         if ((tab[k] = malloc(sizeof(char *) * line_len(str) + 1)) == NULL)
             exit(MALLOC_ERROR);
-        while (str[i] != '\n' && tab[k] != NULL) {
+        while (str[i] != '\n' && tab[k] != NULL)
+        {
             tab[k][j] = str[i];
             i = i + 1;
             j = j + 1;

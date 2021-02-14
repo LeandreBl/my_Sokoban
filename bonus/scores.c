@@ -10,7 +10,7 @@
 
 #include "include/sokoban.h"
 
-void		init_pairs()
+void init_pairs()
 {
   init_pair(1, COLOR_MAGENTA, COLOR_MAGENTA);
   init_pair(2, COLOR_GREEN, COLOR_BLACK);
@@ -21,12 +21,12 @@ void		init_pairs()
   init_pair(7, COLOR_BLUE, COLOR_BLACK);
 }
 
-int		scores(char **tab, t_xy *posdot)
+int scores(char **tab, t_xy *posdot)
 {
-  int		i;
-  float		score;
-  int		nb;
-  float		a;
+  int i;
+  float score;
+  int nb;
+  float a;
 
   a = 0;
   i = 0;
@@ -34,39 +34,39 @@ int		scores(char **tab, t_xy *posdot)
   while (posdot[nb].x < 2000)
     nb = nb + 1;
   while (posdot[i].x < 2000)
-    {
-      if (tab[posdot[i].x][posdot[i].y] == 'X')
-	score = score + 1;
-      i = i + 1;
-    }
+  {
+    if (tab[posdot[i].x][posdot[i].y] == 'X')
+      score = score + 1;
+    i = i + 1;
+  }
   a = nb;
   attron(COLOR_PAIR(4));
   if (score != 0)
     mvprintw(1, COLS / 2 - 10, "<Level completed at [%1.f%%]>",
-	     score / a * 100);
+             score / a * 100);
   if (score == 0)
     mvprintw(1, COLS / 2 - 10, "<Level completed at [0%%]>");
   attroff(COLOR_PAIR(4));
   return (score * 1000);
 }
 
-void		put_tab_color(char **tab, int i, int j, t_xy *posdot)
+void put_tab_color(char **tab, int i, int j, t_xy *posdot)
 {
-  int		k;
-  int		z;
+  int k;
+  int z;
 
   z = 0;
   k = 0;
   if (tab[i][j] == 'X')
+  {
+    while (posdot[k].x != 2000)
     {
-      while (posdot[k].x != 2000)
-	{
-	  if (i == posdot[k].x && j == posdot[k].y)
-	    z = 1;
-	  k = k + 1;
-	}
-      x_char(tab, z, i, j);
+      if (i == posdot[k].x && j == posdot[k].y)
+        z = 1;
+      k = k + 1;
     }
+    x_char(tab, z, i, j);
+  }
   if (tab[i][j] == 'P')
     p_char(tab, i, j);
   if (tab[i][j] == '#')

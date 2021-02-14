@@ -10,10 +10,9 @@
 
 #include "include/sokoban.h"
 
-t_xy            check_pos_mvt(char **tab, t_xy xy, char *path, int color)
+t_xy check_pos_mvt(char **tab, t_xy xy, char *path, int color)
 {
-  int		alpha;
-  int		move;
+  int alpha;
 
   keypad(stdscr, TRUE);
   alpha = getch();
@@ -32,98 +31,91 @@ t_xy            check_pos_mvt(char **tab, t_xy xy, char *path, int color)
   if (alpha == 'M')
     sfMusic_play(theme);
   if (alpha == 10)
-    {
-      endwin();
-      exit(QUIT);
-    }
+  {
+    sfMusic_stop(theme);
+    sfMusic_destroy(theme);
+    endwin();
+    exit(QUIT);
+  }
   return (xy);
 }
 
-t_xy		move_right(char **tab, t_xy xy)
+t_xy move_right(char **tab, t_xy xy)
 {
-  if (tab[xy.x][xy.y + 1] != '#' && tab[xy.x][xy.y + 1] != 'X'
-      && tab[xy.x][xy.y] == 'P')
-    {
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x][xy.y + 1] = 'P';
-      xy = get_pos(tab);
-    }
-  else if (tab[xy.x][xy.y + 1] == 'X' && tab[xy.x][xy.y + 2] != '#'
-	   && tab[xy.x][xy.y + 2] != 'X' && tab[xy.x][xy.y] == 'P')
-    {
-      if (tab[xy.x][xy.y + 2] == 'O')
-	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x][xy.y + 1] = 'P';
-      tab[xy.x][xy.y + 2] = 'X';
-      xy = get_pos(tab);
-    }
+  if (tab[xy.x][xy.y + 1] != '#' && tab[xy.x][xy.y + 1] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x][xy.y + 1] = 'P';
+    xy = get_pos(tab);
+  }
+  else if (tab[xy.x][xy.y + 1] == 'X' && tab[xy.x][xy.y + 2] != '#' && tab[xy.x][xy.y + 2] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    if (tab[xy.x][xy.y + 2] == 'O')
+      sfMusic_play(sfMusic_createFromFile("coin.ogg"));
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x][xy.y + 1] = 'P';
+    tab[xy.x][xy.y + 2] = 'X';
+    xy = get_pos(tab);
+  }
   return (xy);
 }
 
-t_xy            move_left(char **tab, t_xy xy)
+t_xy move_left(char **tab, t_xy xy)
 {
-  if (tab[xy.x][xy.y - 1] != '#' && tab[xy.x][xy.y - 1] != 'X'
-      && tab[xy.x][xy.y] == 'P')
-    {
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x][xy.y - 1] = 'P';
-      xy = get_pos(tab);
-    }
-  else if (tab[xy.x][xy.y - 1] == 'X' && tab[xy.x][xy.y - 2] != '#'
-	   && tab[xy.x][xy.y - 2] != 'X' && tab[xy.x][xy.y] == 'P')
-    {
-      if (tab[xy.x][xy.y - 2] == 'O')
-	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x][xy.y - 1] = 'P';
-      tab[xy.x][xy.y - 2] = 'X';
-      xy = get_pos(tab);
-    }
+  if (tab[xy.x][xy.y - 1] != '#' && tab[xy.x][xy.y - 1] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x][xy.y - 1] = 'P';
+    xy = get_pos(tab);
+  }
+  else if (tab[xy.x][xy.y - 1] == 'X' && tab[xy.x][xy.y - 2] != '#' && tab[xy.x][xy.y - 2] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    if (tab[xy.x][xy.y - 2] == 'O')
+      sfMusic_play(sfMusic_createFromFile("coin.ogg"));
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x][xy.y - 1] = 'P';
+    tab[xy.x][xy.y - 2] = 'X';
+    xy = get_pos(tab);
+  }
   return (xy);
 }
 
-t_xy            move_up(char **tab, t_xy xy)
+t_xy move_up(char **tab, t_xy xy)
 {
-  if (tab[xy.x - 1][xy.y] != '#' && tab[xy.x - 1][xy.y] != 'X'
-      && tab[xy.x][xy.y] == 'P')
-    {
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x - 1][xy.y] = 'P';
-      xy = get_pos(tab);
-    }
-  else if (tab[xy.x - 1][xy.y] == 'X' && tab[xy.x - 2][xy.y] != '#'
-	   && tab[xy.x - 2][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
-    {
-      if (tab[xy.x - 2][xy.y] == 'O')
-	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x - 1][xy.y] = 'P';
-      tab[xy.x - 2][xy.y] = 'X';
-      xy = get_pos(tab);
-    }
+  if (tab[xy.x - 1][xy.y] != '#' && tab[xy.x - 1][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x - 1][xy.y] = 'P';
+    xy = get_pos(tab);
+  }
+  else if (tab[xy.x - 1][xy.y] == 'X' && tab[xy.x - 2][xy.y] != '#' && tab[xy.x - 2][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    if (tab[xy.x - 2][xy.y] == 'O')
+      sfMusic_play(sfMusic_createFromFile("coin.ogg"));
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x - 1][xy.y] = 'P';
+    tab[xy.x - 2][xy.y] = 'X';
+    xy = get_pos(tab);
+  }
   return (xy);
 }
 
-t_xy            move_down(char **tab, t_xy xy)
+t_xy move_down(char **tab, t_xy xy)
 {
-  if (tab[xy.x + 1][xy.y] != '#' && tab[xy.x + 1][xy.y] != 'X'
-      && tab[xy.x][xy.y] == 'P')
-    {
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x + 1][xy.y] = 'P';
-      xy = get_pos(tab);
-    }
-  else if (tab[xy.x + 1][xy.y] == 'X' && tab[xy.x + 2][xy.y] != '#'
-	   && tab[xy.x + 2][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
-    {
-      if (tab[xy.x + 2][xy.y] == 'O')
-	sfMusic_play(sfMusic_createFromFile("coin.ogg"));
-      tab[xy.x][xy.y] = ' ';
-      tab[xy.x + 1][xy.y] = 'P';
-      tab[xy.x + 2][xy.y] = 'X';
-      xy = get_pos(tab);
-    }
+  if (tab[xy.x + 1][xy.y] != '#' && tab[xy.x + 1][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x + 1][xy.y] = 'P';
+    xy = get_pos(tab);
+  }
+  else if (tab[xy.x + 1][xy.y] == 'X' && tab[xy.x + 2][xy.y] != '#' && tab[xy.x + 2][xy.y] != 'X' && tab[xy.x][xy.y] == 'P')
+  {
+    if (tab[xy.x + 2][xy.y] == 'O')
+      sfMusic_play(sfMusic_createFromFile("coin.ogg"));
+    tab[xy.x][xy.y] = ' ';
+    tab[xy.x + 1][xy.y] = 'P';
+    tab[xy.x + 2][xy.y] = 'X';
+    xy = get_pos(tab);
+  }
   return (xy);
 }
-

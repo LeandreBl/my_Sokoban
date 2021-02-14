@@ -10,10 +10,11 @@
 
 #include "include/sokoban.h"
 
+sfMusic *theme;
+sfMusic *load;
+
 char *file_test(char *input)
 {
-    int size;
-    int stream;
     char *buffer;
     struct stat file;
 
@@ -33,10 +34,9 @@ void music()
     sfMusic_play(theme);
 }
 
-int main(int ac, char **av)
+int main(void)
 {
     char *buffer;
-    int size;
     char *input;
     int a;
 
@@ -46,35 +46,35 @@ int main(int ac, char **av)
         return (0);
     if ((buffer = strdup(file_test(input))) == NULL)
         return (84);
-    if ((a = p_x_o_check(str_to_tab(buffer), buffer)) != 0) {
+    free(input);
+    if ((a = p_x_o_check(str_to_tab(buffer), buffer)) != 0)
+    {
         endwin();
-        (a == 1)
-            ? printf("%sIncorrect number of [X] and [O]%s\n", BOLDRED, RESET)
-            : 0;
-        (a == 2) ? printf("%sIncorrect number of [P]%s\n", BOLDRED, RESET) : 0;
+        if (a == 1)
+            printf("%sIncorrect number of [X] and [O]%s\n", BOLDRED, RESET);
+        else if (a == 2)
+            printf("%sIncorrect number of [P]%s\n", BOLDRED, RESET);
         return (0);
     }
     terrain_display(str_to_tab(buffer), buffer, 2);
     free(buffer);
+    sfMusic_destroy(load);
+    sfMusic_destroy(theme);
     return (0);
 }
 
 char *menu()
 {
-    WINDOW *box;
-    int i;
     char **names;
-    int a;
     char *input;
 
-    if ((names = display_files(opendir("."))) == NULL) {
+    if ((names = display_files(opendir("."))) == NULL)
+    {
         printf("\n%sNo .sk file found in current repository\n\n%s",
                BOLDRED,
                RESET);
         return (0);
     }
-    i = 0;
-    a = 0;
     initscr();
     clear();
     curs_set(0);
@@ -83,7 +83,8 @@ char *menu()
     attron(COLOR_PAIR(1));
     keypad(stdscr, TRUE);
     input = menu_loop(names);
-    sfMusic_play(sfMusic_createFromFile("load.ogg"));
+    load = sfMusic_createFromFile("load.ogg");
+    sfMusic_play(load);
     return (input);
 }
 

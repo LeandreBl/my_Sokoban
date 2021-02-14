@@ -29,7 +29,7 @@ OBJ     = $(SRCS:.c=.o)
 
 RM      = rm -f
 
-FLAGS   += -W -Wall -Wextra
+CFLAGS   += -W -Wall -Wextra
 
 all: $(NAME)
 
