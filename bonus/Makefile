@@ -12,7 +12,7 @@ NAME    = my_sokoban
 
 CC      = gcc
 
-LIB     = -L./lib -lmy -lncurses -lc_graph_prog
+LIB     = -L./lib -lmy -lncurses -lcsfml-audio
 
 SRCS    = main.c \
 	  display.c \

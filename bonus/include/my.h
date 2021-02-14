@@ -79,8 +79,4 @@ int	my_find_prime_sup(int);
 
 int	my_show_wordtab(char **);
 
-char	*my_strdup(char *);
-
-int	my_printf(char *, ...);
-
 #endif /* MY_H_ */
